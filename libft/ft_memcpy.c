@@ -6,41 +6,49 @@
 /*   By: jalcibar <jalcibar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:36:29 by jalcibar          #+#    #+#             */
-/*   Updated: 2026/04/24 17:36:10 by jalcibar         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:55:44 by jalcibar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// NOOOOOOOOOOOOO FUNCIONA YA QUE CAMBIA EL STRING DE ORIGEN
 
 #include <stddef.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char	*dest_temp;
-	char	*src_temp;
-	int		count;
+	int	count;
 
-	src_temp = (char *) src;
-	dest_temp = (char *) dest;
 	count = 0;
 	while (count <= n)
 	{
-		dest_temp [count] = src_temp [count];
+		((unsigned char *)dest)[count] = ((unsigned char *)src)[count];
 		count++;
 	}
-	return (dest_temp);
+	return (dest);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 
 int main(void)
 {
-	char	string_org[]  = "see you world";
-	char	string_dest[] = "";
-	printf("%s\n", string_org);
-	printf("%p\n",ft_memcpy(string_dest, string_org, strlen(string_org)));
-	printf("%s\n", string_dest);
-	printf("%s\n", string_org);
+	char	src_string[]  = "see you world";
+	char	dest_string[] = "lola";
+
+	printf("%s\n", src_string);
+	printf("%s\n", dest_string);
+	printf("%p\n", &src_string);
+	printf("%p\n", &dest_string);
+	printf("%p\n", ft_memcpy(dest_string, src_string, strlen(src_string)));
+	printf("%s\n", src_string);
+	printf("%s\n", dest_string);
 	return (0);
 }
+*/
+/*
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+The  memcpy()  function  copies  n bytes from memory area src to memory
+area dest.  The memory areas must not overlap.  Use memmove(3)  if  the
+memory areas do overlap.
+
+mynote: if dest and source memory overlap,org memory will be modified
+memcpy original function does that too
+*/

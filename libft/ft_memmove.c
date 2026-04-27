@@ -6,30 +6,32 @@
 /*   By: jalcibar <jalcibar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:36:29 by jalcibar          #+#    #+#             */
-/*   Updated: 2026/04/24 17:41:11 by jalcibar         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:49:16 by jalcibar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// NOOOOOOOOOOOOO FUNCIONA YA QUE CAMBIA EL STRING DE ORIGEN
-// Y ademas no cambia el string de destino
-
+#include <stdio.h>
 #include <stddef.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*dest_temp;
-	char	*src_temp;
-	int		count;
+	int	count;
+	char *temporary_array[n];
 
-	src_temp = (char *) src;
-	dest_temp = (char *) (dest_temp + n);
-	count =  n;
-	while (count >= 0)
+	count = 0;
+	while (count <= n)
 	{
-		dest_temp [count] = src_temp [count];
-		count--;
+		((char *)temporary_array)[count] = ((const char *)src)[count];
+		count++;
 	}
-	return (dest_temp);
+	printf("%s\n", *temporary_array);
+	count = 0;
+	while (count <= n)
+	{
+		((char *)dest)[count] = ((char *)temporary_array)[count];
+		count++;
+	}
+	return(dest);
 }
 
 #include <stdio.h>
@@ -37,11 +39,25 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 int main(void)
 {
-	char	string_org[]  = "see you world";
-	char	string_dest[] = "";
-	printf("%s\n", string_org);
-	printf("%p\n",ft_memmove(string_dest, string_org, strlen(string_org)));
-	printf("%s\n", string_dest);
+	char	src_string[]  = "see you world";
+	char	dest_string[] = "lola";
+
+	printf("%s\n", src_string);
+	printf("%s\n", dest_string);
+	printf("%p\n", &src_string);
+	printf("%p\n", &dest_string);
+	printf("%p\n", memmove(dest_string, src_string, strlen(src_string)));
+	printf("%s\n", src_string);
+	printf("%s\n", dest_string);
 	return (0);
 }
 
+/*
+#include <string.h>
+void *memmove(void *dest, const void *src, size_t n);
+The  memmove()  function  copies n bytes from memory area src to memory
+area dest.  The memory areas may overlap: copying takes place as though
+the  bytes in src are first copied into a temporary array that does not
+overlap src or dest, and the bytes are then copied from  the  temporary
+array to dest.
+*/
