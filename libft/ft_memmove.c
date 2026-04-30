@@ -46,7 +46,7 @@ int main(void)
 	printf("%s\n", dest_string);
 	printf("%p\n", &src_string);
 	printf("%p\n", &dest_string);
-	printf("%p\n", memmove(dest_string, src_string, strlen(src_string)));
+	printf("%p\n", ft_memmove(dest_string, src_string, strlen(src_string)));
 	printf("%s\n", src_string);
 	printf("%s\n", dest_string);
 	return (0);
